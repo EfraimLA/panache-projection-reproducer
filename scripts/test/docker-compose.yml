@@ -1,0 +1,16 @@
+version: '3'
+volumes:
+  postgres_data_reproducer:
+    driver: local
+services:
+  # Database For Local Testing Only
+  reproducer_postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data_reproducer:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
