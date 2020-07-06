@@ -2,24 +2,25 @@ package io.efraim.models;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
-
 @RegisterForReflection
 public class TicketUser {
 
-    public final Long id;
-    // Entity Relation
-    public final User user;
+    public Long id;
+    public User issuer;
+    public User admin;
 
-    public TicketUser(Long id, User user) {
+    public TicketUser(final Long id, final User issuer, final User admin) {
         this.id = id;
-        this.user = user;
+        this.issuer = issuer;
+        this.admin = admin;
     }
 
     @Override
     public String toString() {
         return "TicketUser{" +
                 "id=" + id +
-                ", user=" + user +
+                ", issuer=" + issuer +
+                ", admin=" + admin +
                 '}';
     }
 }

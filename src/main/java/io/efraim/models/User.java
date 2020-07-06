@@ -15,15 +15,19 @@ public class User extends PanacheEntityBase {
 
     public String name;
 
-    @OneToMany(mappedBy = "user")
-    public List<Ticket> tickets = new ArrayList<>();
+    @OneToMany(mappedBy = "issuer")
+    public List<Ticket> issuedTickets = new ArrayList<>();
+
+    @OneToMany(mappedBy = "admin")
+    public List<Ticket> adminTickets = new ArrayList<>();
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", tickets=" + tickets +
+                ", issuedTickets=" + issuedTickets +
+                ", adminTickets=" + adminTickets +
                 '}';
     }
 }
