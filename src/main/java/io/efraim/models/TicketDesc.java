@@ -9,7 +9,7 @@ public class TicketDesc {
     public final String title;
     public final String description;
 
-    public TicketDesc(Long id, String title, String description) {
+    public TicketDesc(final Long id, final String title, final String description) {
         this.id = id;
         this.title = title;
         this.description = description;

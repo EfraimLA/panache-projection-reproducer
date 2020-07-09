@@ -9,6 +9,8 @@ import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import org.jboss.logging.Logger;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -22,6 +24,9 @@ public class Main {
     public static class App implements QuarkusApplication {
 
         private static final Logger LOGGER = Logger.getLogger(App.class);
+
+        @Inject
+        EntityManager em;
 
         @Override
         @Transactional
@@ -62,8 +67,10 @@ public class Main {
             ticketDescs.forEach(t -> LOGGER.info("Projected TicketDesc: " + t));
 
             // Throws NPE
-            final List<TicketUser> ticketUsers = Ticket.findAll().project(TicketUser.class).list();
+//            final List<TicketUser> ticketUsers = em.createQuery("select t from Ticket t", TicketUser.class).getResultList();
 
+            // Doesn't throw exception but fails when fetching null relations
+            final List<TicketUser> ticketUsers = em.createQuery("select new io.efraim.models.TicketUser(t.id, t.issuer, t.admin) from Ticket t", TicketUser.class).getResultList();
             ticketUsers.forEach(t -> LOGGER.info("Projected TicketUser: " + t));
 
             Quarkus.waitForExit();

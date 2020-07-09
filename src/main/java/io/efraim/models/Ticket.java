@@ -20,4 +20,15 @@ public class Ticket extends PanacheEntityBase {
 
     @ManyToOne(fetch = FetchType.LAZY)
     public User admin;
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", issuer=" + issuer +
+                ", admin=" + admin +
+                '}';
+    }
 }
